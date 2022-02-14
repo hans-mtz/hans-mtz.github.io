@@ -1,0 +1,540 @@
+---
+title: "Towards prospectus"
+subtitle: ""  
+author: "Hans Martinez"
+date: '`r format(Sys.Date(),"%b %d, %Y")`'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      slideNumberFormat: "%current%/%total%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+header-includes:
+  - \usepackage{bbm}
+  - \usepackage{eucal}
+  - \usepackage{bm}
+  - \usepackage{amsmath}
+  - \usepackage{amsfont}
+  - \usepackage{longtable}
+  - \usepackage{booktabs}
+  - \newtheorem{definition}{Definition}
+  - \newtheorem{theo}{Theorem}
+  - \newtheorem{lemma}{Lemma}
+  - \usepackage[lite]{mtpro2}
+  - \usepackage
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width=9, fig.height=3.5, fig.retina=3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#4F2683",
+  secondary_color = "#4F2683",
+  inverse_header_color = "#FFFFFF",
+  base_font_size = "30px",
+  title_slide_background_image = "Horizontal_Rev.png",
+  title_slide_background_size = "5% no-repeat",
+  title_slide_background_position = "bottom",
+  extra_css = list(
+  ".small" = list("font-size" = "80%", 
+                  "color" = "#4F2683"),
+  ".full-width" = list(
+    display = "flex",
+    width   = "100%",
+    flex    = "1 1 auto"
+    )
+  ),
+  header_font_google = google_font("Merriweather", "400","400i","700"),
+  text_font_google   = google_font("Arimo", "400", "400i"),
+  code_font_google   = google_font("IBM Plex Mono")
+)
+```
+
+## Objective
+
+- Prospectus plan
+- Update
+  - Where does it matter?
+  - How to estimate?
+
+---
+name: prospectus
+## Prospectus
+
+1. Clear and original research question
+1. Question is interesting (nontrivial problem) and important (of interest to scholars)
+1. Feasible
+1. Publishable
+
+[.small[Document]](#doc)
+
+---
+class: inverse center middle
+
+# Stochastic revealed preferences (SRP)
+
+---
+layout: true
+
+### SRP
+
+---
+name: srp
+
+- SRP can accommodate not only ME, but also any other latent variables of interest
+- SRP test can be reformulated using shape restrictions, only convexity of cost function has been exploited in the past:
+  1. Concavity of the profit function
+  1. Concavity of the production function
+- We can do better demand estimates, so far only negative slope (inverse demand) and NSD:
+  1. Symmetry
+  1. Iteration methods for M-matrices
+  1. Taylor approximation
+
+[.small[Summer Paper]](#summerp)
+
+---
+
+#### Why would applied IO researchers care?
+
+- SRP test could be used to:
+  1. Before estimation, check if a particular model of competition fit certain market of interest
+  1. After estimation, confirm parametric estimates rationalize data under a competition model hypothesis
+  1. Obtain bounds for latent variables of interest (marginal costs, markups, Lerner index, competition parameter)
+
+---
+layout: true
+
+### Stochastic Bernard Rationalizability
+
+---
+
+#### Definition
+
+A random array $(\mathbf{q}_t^*,\mathbf{p}_t^*)_{t\in\mathcal T}$ is *s/B-rationalizable* with market structure $(\Omega_{jt})_{j \in \mathcal J}$, if there exists a tuple $\left(\mathbf\Pi, (\mathbf{\lambda}_t)_{t\in\mathcal T}\right)$, such that:
+1. $\mathbf \Pi$ is a random, continuous and concave profit function;
+2. $\mathbf{\Pi'}(\mathbf{p}_{jt}^*)-\Omega_{jt}\mathbf{\lambda}_{t}[\nabla \mathbf{q}(\mathbf{p}_t^*)(\mathbf{p}_t^*-\mathbf{mc}_t)+\mathbf{q}(\mathbf{p}_t^*)]\le0$ a.s. for every $j\in\mathcal J$ and every $t\in\mathcal T$;
+3. $(\mathbf{\lambda}_t)_{t\in\mathcal T}$ is a positive random vector supported on or inside a known set $\Delta \subseteq\mathbb R_{++}^{|\mathcal T|}$, $\nabla \mathbf{q}(\mathbf{p}_t^*)$ is a $|L|\times|L|$ NSD random matrix, and $\mathbf{q}(\mathbf{p}_t^*)=\mathbf{q}_t^*$ for all $t\in\mathcal T$;
+
+---
+
+4. $\Omega_{jt}=[\omega_{jt}^l]$ is a matrix $|L_j|\times|L|$, where $\omega_{jt}^l = 0$ if  $l \not\in L_j$ and $\omega_{jt}^l = 1$ if  $l \in L_j$; 
+5. and $\mathbf{mc}_{t}$ is a random vector, where $0 \le \mathbf{mc}_{jt}^l \le \mathbf{p}^{*l}_{jt}$ a.s. if $l \in L_j$  and $\mathbf{mc}_{jt}^l=0$ a.s. if $l \not\in L_j$  for all $j\in\mathcal J$ and $t\in\mathcal T$.
+6. For every $j\in \mathcal J$ and $t\in \mathcal T$, it must be the case that
+
+$$\begin{equation}
+ \mathbb P\left(\mathbf{p}_{jt}^*\not=0, \mathbf{\Pi'}(\mathbf{p}_{jt}^*)-\Omega_{jt}\mathbf{\lambda}_{t}[\nabla \mathbf{q}(\mathbf{p}_t^*)(\mathbf{p}_t^*-\mathbf{mc}_t)+\mathbf{q}(\mathbf{p}_t^*)]<0\right)=0.
+ \end{equation}$$
+
+---
+layout: false
+
+**Theorem:** The following statements are equivalent:
+  
+1. The random array $\{\mathbf{p}_t,\mathbf{q}_t\}_{t\in\mathcal T}$ is *s/B-rationalizable* with market structure $(\Omega_{jt})_{t\in\mathcal T}$ with 
+
+2. There exists positive random vectors $(\mathbf{\pi}_{jt})_{t\in\mathcal T}$, non-negative random vector $(\mathbf{mc}_{jt})_{t\in\mathcal T}$, $(\mathbf{\lambda}_{jt})_{t\in\mathcal T}$ supported on or inside $\Delta$, random NSD $|L|\times |L|$ matrix $(\mathbf{\Lambda}_t)_{t\in\mathcal T}$, such that:
+
+  1. $0 \le \mathbf{mc}_{jt}^l \le \mathbf{p}_{jt}^l$ a.s. if $l \in L_j$, $\mathbf{mc}_{jt}^l=0$ a.s. if $l \not\in L_j$, 
+  1. $\mathbf{\Lambda}_t (\mathbf{p}_s^* -\mathbf{p}_t^*)= \mathbf{q}_s^* - \mathbf{q}_t^* + \mathbf\alpha_t$
+  1. $\mathbf{\pi}_{jt} - \mathbf{\pi}_{js} \le \mathbf{\lambda}_{t}[\mathbf{\Lambda}_t(\mathbf{p}_{t}^*-\mathbf{mc}_{t}) + \mathbf{q}_t^*]'\Omega_{jt}(\mathbf{p}_{jt}^*-\mathbf{p}_{js}^*)$ 
+  for all $t,s\in \mathcal T$, and all $j\in \mathcal J$.
+
+---
+layout: false
+
+### Measurement Error
+
+*Measurement error*, $\mathbf{w}=(\mathbf{w}_t)_{t\in\mathcal T}\in W$, is the difference between the observed random variables and their true values. 
+
+\begin{equation}
+  \mathbf{w}=\left( 
+    \begin{array}{c}
+      \mathbf{w}^q_t \\
+      \mathbf{w}^p_t
+    \end{array}
+  \right) =
+  \left(
+    \begin{array}{c}
+      \mathbf{q}_t-\mathbf{q}_t^* \\
+      \mathbf{p}_t-\mathbf{p}_t^*
+      \end{array}
+  \right), \quad \forall t \in \mathcal T \notag
+\end{equation}
+
+---
+layout: true
+
+### Moment conditions
+
+---
+
+\begin{equation}
+ g_M(\mathbf{x},\mathbf{e})=log(\mathbf{p}_t)-log(\mathbf{p}_t-\mathbf{w}^p_t)
+\end{equation}
+
+\begin{equation}
+g_{C}(\mathbf{x},\mathbf{e})=\left\{\begin{array}{ll}
+                \mathbb{1}\left(\mathbf{p}_{jt}^l-\mathbf{w}_{jt}^{pl}-\mathbf{mc}_{jt}^l\ge0\right)-1 & \text{ if } l \in L_j \\
+                \mathbf{mc}_{jt}^l=0 & \text{ if } l \not\in L_j
+                \end{array} \right.
+\end{equation}
+
+---
+
+\begin{multline}
+g_I(\mathbf{x},\mathbf{e})=\\ 
+\mathbb 1 \left[ \mathbf{\pi}_{jt} - \mathbf{\pi}_{js} \le \mathbf{\lambda}_{t}[\mathbf{\Lambda}_t(\mathbf{p}_{t}-\mathbf{w}^p_t-\mathbf{mc}_{t}) + \mathbf{q}_t]'\Omega_{jt}(\mathbf{p}_{jt}-\mathbf{w}^p_{jt}-\mathbf{p}_{js}+\mathbf{w}^p_{js})\right] \\ -1, \; t\ne s \in \mathcal T, j \in \mathcal J
+\end{multline}
+
+
+\begin{equation}
+  g_D(\mathbf{x},\mathbf{e})=\mathbf{\Lambda}_t (\mathbf{p}_s-\mathbf{w}^p_s -\mathbf{p}_t+\mathbf{w}^p_t)-\mathbf{q}_t + \mathbf{q}_s + \mathbf \alpha_t
+\end{equation}
+
+---
+
+#### Additional instruments
+
+\begin{equation}
+  g_Z(\mathbf{x},\mathbf{e})=\left[\begin{array}{l}
+  \mathbf{z}^{'\pi}_t\mathbf{\pi}_t \\
+  \mathbf{z}^{'mc}_t\mathbf{mc}_t \\
+  \end{array}\right]
+\end{equation}
+
+---
+layout: false
+class: inverse center middle
+
+# Immigrant job market and productivity losses in Canada
+
+---
+layout: true
+
+### IJM + productivity losses
+
+
+---
+name: ijm
+
+* **Question**: Frictions in the Canadian job market for immigrants (TFW and SIE) and for employers negatively affect firms' productivity. How big? Can we measure them?
+
+* **Data**: StatsCan + IRCC linked databases
+
+* **Approach**: 
+  1. Search model to calibrate frictions and recover counterfactual matches.
+  2. 2SGMM procedure for Production function + productivity monotonic in immigrant skills.
+
+[.small[Recap]](#ijm_recap)
+---
+layout:true
+
+### Where does it matter?
+
+---
+
+For firms,
+
+$$\max_{x\in \mathbb R_+} P\mathbb E[F(x)e^{\omega+\varepsilon}]-wx$$
+
+if employers believe that $\mathbb E [\varepsilon| \theta=Native]\ge\mathbb E [\varepsilon| \theta=Immigrant]$
+
+and, by law, $w_N=w_I=w$, then, 
+
+$$\mbox{FOC become} \left\{ \begin{array}{cl}
+  Pf(x)e^{\omega} = w & \theta=Native \\
+  Pf(x)e^{\omega-\xi_i} \le w & \theta=Immigrant
+\end{array} \right.$$
+
+---
+
+Firm bias:
+
+- $\mathbb E [\varepsilon| \theta=Native]\ge\mathbb E [\varepsilon| \theta=Immigrant]$ : Firms expect more than average negative shocks when hiring an immigrant versus hiring a native.
+
+- $\mathbb E [\omega| \theta=Native]\ge\mathbb E [\omega| \theta=Immigrant]$ : Firms could also take expectations over the candidate's skills. 
+
+- We usually think of productivity as given and firms taking decisions over inputs. However, firms might expect a certain productivity level by choosing particular inputs (workers' skills, quality of inputs).
+
+---
+layout: true
+
+### How to estimate ?
+
+---
+name: ijm-est
+
+  1. Assume we observe $\mathcal O=\{Y_{jt}, M_{jt}, N_{jt}, I_{jt}, S^N_{jt}, S^I_{jt} \}_{t=1}^T$ for firms $j=1,\dots,J$.
+  1. Assume we have a model such that I can get counter factual $\{\tilde N_{jt}, \tilde I_{jt}, \tilde S^N_{jt}, \tilde S^I_{jt}\}_{t=1}^T$. 
+  
+I expect the share of immigrant workers and the overall employee's skills to increase. 
+  
+Let $X_{jt}=(M_{jt},N_{jt},I_{jt})$ and $S_{jt}=(S^N_{jt},S^I_{jt})$, and low case letters are log demeaned variables.
+
+[.small[Model]](#ijm_model)
+
+---
+  
+  1. Fit $y_{jt}=\phi(x_{jt},s_{jt})+\varepsilon_{jt}$. 
+  1. Assume functional form for the prod fun $f(x_{jt})=\alpha' x_{jt} +\omega_{jt}+\varepsilon_{jt}$ with $\mathbb E[\varepsilon_{jt}]=\mathbb E[\omega_{jt}|x_{jt-1}]=0$.
+  1. Then, $\hat \omega_{jt}=\hat \phi(x_{jt},s_{jt})-\hat \alpha'x_{jt}$.
+  1. Predict $\tilde y_{jt} = \hat\phi(\tilde x_{jt}, \tilde s_{jt})$.
+  1. Keep same functional form, but use counterfactual data $f(\tilde x_{jt})=\tilde\alpha' \tilde x_{jt} +\tilde \omega_{jt}+\varepsilon_{jt}$.
+  1. Then, $\hat{\tilde{\omega}}_{jt}=\hat \phi(\tilde x_{jt},\tilde s_{jt})-\hat{\tilde{\alpha}}'\tilde x_{jt}$.
+
+[.small[Estimator]](#estimator)
+
+---
+layout: false
+class: inverse center middle
+
+# Tax evasion and productivity in Mexico
+
+---
+layout: true
+
+### Tax evasion and productivity
+
+---
+
+* Firms have incentives to under-report profits to avoid taxes. Productivity estimates are likely to be biased.
+
+* Mexico: Non-detected tax evasion up to $10 billion USD per year .small[(Zumaya et al., 2021)]
+
+* **Question**: Can we recover productivity estimates in the presense of measurement error by using a micro-founded IC as location condition?
+
+* **Data**: INEGI-EMIM, Anonymized tax filings (?) .small[(Zumaya et al., 2021)]
+
+* **Approach**: Hu & Schennach (2008), Hu (2021), Hu & Yao (*J. Econom., forthcoming*)
+
+---
+
+$$\begin{aligned}
+  Y&=G(x^*)e^{\omega+\varepsilon} \\
+  X&=X^*+\Delta X(\theta) \\
+  \Delta X(\theta) &= \left \{ \begin{array}{ll}
+    0 & (1-\tau)\Pi(x^*) \ge \Pi(x^*)-\tau\Pi(x)-\kappa Pr(a)-c(\Delta x) \\
+    \mathbf (0,\tilde x] & otherwise
+  \end{array} \right.\\
+\end{aligned}$$
+
+
+
+---
+
+Can we use a micro-founded IC as location condition? $M[f]=x^*$, where $M[f]\equiv$
+
+$$\begin{aligned}
+  \sup\left \{ v: \int^{v}_{x^*}  \left \{ \tau [\Pi(x^*)-\Pi(x)]-c(x-x^*)\right\} f_{X|X^*}(x|x^*) dx \le\kappa Pr(a)  \right\}
+\end{aligned}$$
+
+Assume firms only over-report expenses, then $\Pi(x)=PY-\rho X$.
+
+Consequently, $\Pi(\tilde x)=0$. Once they reach zero profits, firms don't have incentives to over-report more.
+
+---
+layout: true
+### How to estimate?
+
+---
+
+\begin{equation}
+  f(y_{it},x_{it},p_{it})  = \\
+  f(y_{it},x_{it},p_{it},\omega_{it},\omega_{it-1},x^*_{it})= \\
+  f(y_{it}| x^*_{it},\omega_{it})
+  f(p_{it}|x^*_{it},\omega_{it})
+  f(\omega_{it}|\omega_{it-1})
+  f(x_{it}|x^*_{it})
+  f(\omega_{it-1})f(x^*)
+\end{equation}
+
+---
+
+\begin{equation}
+  \color{blue}{f(y_{it}| x^*_{it},\omega_{it})}
+  \color{green}{f(p_{it}|x^*_{it},\omega_{it})}
+  \color{violet}{f(\omega_{it}|\omega_{it-1})}
+  \color{red}{f(x_{it}|x^*_{it})}
+  \color{orange}{f(\omega_{it-1})f(x^*_{it})}
+\end{equation}
+
+  
+\begin{equation}
+    \color{blue}{ y_{it} = g(x^*_{it})+\omega_{it}+\varepsilon^Y_{it}} \\
+  \color{green}{ \ln\left(\frac{\rho_t X^*_{it}}{P_{t}Y_{it}}\right)=\ln\left(\frac{G_x(x^*_{it})X^*_{it}}{G(x^*_{it})}\right) - \varepsilon^Y_{it}} \\
+  \color{violet}{\omega_{it}=\omega_{it-1}+\varepsilon^\omega_{it}} \\
+  \color{red}{M[f]=x^*} \\
+  \color{orange}{\text{Flexible input assumption.}}
+\end{equation}
+
+---
+In addition, to calibrate the cost of cheating:
+
+$$\begin{aligned}P(cheated)=&\hat P(cheated|Audited)\hat P(Audited)+\\
+&P(cheated|Not Audited)\hat P(Not Audited)
+\end{aligned}$$
+
+- The cost of cheating could be function of firm characteristics. 
+- Estimate for different values of unobserved $P(cheated|Not Audited)$.
+
+---
+
+- Hu & Yao (Journal of Econometrics, *forthcoming*) use sieve maximum likelihood estimator (MLE)
+
+- Mix ELVIS and sieve MLE (?)
+
+---
+layout: false
+class: inverse center middle
+
+# Aggressive entry, prices and productivity
+
+---
+name: epp
+### Aggressive entry, prices and productivity
+
+
+* Standard economic theory:
+  * $p_{it}-mc_{i}(\omega_i)\ge0$, 
+  * $\implies$ most productive firm, lowest price 
+  * $\implies$ market shares inform about firms' productivity and markups.
+
+* However, Firms might forgo **today's** profits if the cost of recovering market shares **tomorrow** is greater than immediate losses.
+
+* Case of study: [Whirlpool vs LG](#timeline) (US international trade commission) .small[(Flaaen et al., _AER_ 2020 )]
+
+
+---
+### Aggressive entry, prices and productivity
+
+* **Key Friction**: Demand dynamics and switching costs.
+
+* **Questions**: In the presence of entry and demand switching costs, is it profit-maximizing for firms to set $p-mc\ge0$?
+
+* **Data**: Nielsen .small[Flaaen et al.(_AER_ 2020 ) Gap Intelligence + Traqline Market Research]
+
+* **Method**: Structural dynamic model with beliefs and demand switching costs .small[(Aguirregabiria and Jeon, _Rev.Ind.Organ._ 2020)]
+
+
+---
+layout: false
+class: center, middle
+
+# Thanks!
+
+---
+name: ijm_recap
+### Recap
+
+* Immigrants are key for the economic development of Canada by filling in the gaps in the labor market. By 2036, 30% of pop. .small[(Mortency et al., 2017)]
+
+* However, immigrants suffer unemployment and underemployment .small[(Adamuti-Trache, 2016)], and face multiple frictions (financial, signaling, networks).
+
+* Furthermore, employers do not actively recruit immigrants, can't assess foreign credentials, don't assess immigrants competencies, have a preference for Canadian experience and domestic candidates .small[(Chhinzer and Oh, 2021)]. Firm side remains understudied. 
+
+[.small[Back]](#ijm)
+
+---
+layout: true
+### The model
+
+---
+name: ijm_model
+Two key frictions:
+
+- Workers search friction $\implies$ affects the pool of candidates from which firms randomly draw.
+
+- Firms' bias (statistical discrimination) $\implies$ affects the probability of getting a job for candidates.
+
+---
+
+Firm bias (statistical discrimination) will affect applicants probabilities to obtain a job.
+
+$$P(\text{getting a job}|N)\ge P(\text{getting a job}|I)$$
+
+> Intuition: If firms get an immigrant in the current period, they would wait another period to get a new draw and hopefully get a native candidate.
+
+[.small[Back]](#ijm-est)
+
+---
+name: estimator
+layout: false
+
+### How to estimate?
+
+\begin{align}
+ \alpha = [x_{jt-1}'x_{jt1}']^{-1}x_{jt-1}'\hat \phi(x_{jt},s_{jt}) \\
+  \tilde \alpha = [\tilde x_{jt-1}'\tilde x_{jt1}]^{-1}\tilde x_{jt-1}'\hat \phi(\tilde x_{jt},\tilde s_{jt})
+\end{align}
+
+[.small[Back]](#ijm-est)
+
+---
+name: timeline
+
+```{r, eval=T,  include=TRUE, fig.align='center'}
+knitr::include_graphics("tl.png")
+```
+
+[.small[Back]](#epp)
+
+---
+name: doc
+### Document
+
+- Convey that research plan satisfies 1-4.
+- Present and discuss:
+  1. Paper's idea
+  1. Motivation
+  1. Originality
+  1. Strategy
+- Empirical paper:
+  1. Outline identification and strategy
+  1. Data to be used
+  1. Summary statistics or preliminary results
+  
+[.small[Back]](#prospectus)
+
+---
+layout: false
+name: summerp
+### Stochastic Cournot Rationalizability and measurement error
+
+- **Question:** Do the observed price and quantities in the oil industry arise as an equilibrium of Cournot competition if quantities are mismeasured?
+
+- **What I do:** I use tools developed by .small[Schnenach (2014)] and adapted by .small[Aguiar and Kashaev (2020)] to introduce measurement error in .small[Carvajal et al. (2013)].
+
+- **What I find:** The Cournot hypothesis can no longer be rejected at the 5% significance level if we account for measurement error in quantities.
+
+- **Limitations:** 1) Silent about Symmetric Market Power 2) Demand 3) Technical issues (iid games, test's power, mismeasured prices)
+
+---
+
+- 3 interesting questions to applied IO researchers:
+  1. Counterfactual demand estimates. Intuition: Products with similar characteristics should attract similar buyers.
+  1. Recover marginal costs/ markups
+  1. How much is driven by parametric assumptions?
+
+- What's next?
+  1. Reformulate using profit function
+  1. Bertrand and product differentiation
+  1. Define Market and find data (RTE Cereal, airplane trips, yogurts, detergents)
+  
+---
+
+[.small[Back]](#srp)
